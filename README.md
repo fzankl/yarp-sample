@@ -8,8 +8,8 @@ This example shows how to work with YARP, a reverse proxy library for building f
 
 Further information:
 
-English: https://www.fzankl.de/en/blog/building-a-fast-and-reliable-reverse-proxy-with-yarp
-German: https://www.fzankl.de/de/blog/erstellen-eines-schnellen-und-zuverlassigen-reverse-proxy-mit-yarp
+ * English: https://www.fzankl.de/en/blog/building-a-fast-and-reliable-reverse-proxy-with-yarp
+ * German: https://www.fzankl.de/de/blog/erstellen-eines-schnellen-und-zuverlassigen-reverse-proxy-mit-yarp
 
 ## How to run this sample
 
