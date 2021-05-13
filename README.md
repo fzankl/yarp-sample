@@ -6,6 +6,11 @@ Example how to work with YARP using appsettings.json and code based configuratio
 
 This example shows how to work with YARP, a reverse proxy library for building fast proxy servers in .NET. The implementation shows the basic setup using appsettings.json and code based configuration approach. 
 
+Further information:
+
+ * English: https://www.fzankl.de/en/blog/building-a-fast-and-reliable-reverse-proxy-with-yarp
+ * German: https://www.fzankl.de/de/blog/erstellen-eines-schnellen-und-zuverlassigen-reverse-proxy-mit-yarp
+
 ## How to run this sample
 
 To run this sample you have to run all projects in the solution.
