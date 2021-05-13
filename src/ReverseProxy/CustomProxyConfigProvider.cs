@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using Microsoft.Extensions.Primitives;
-using Microsoft.ReverseProxy.Abstractions;
-using Microsoft.ReverseProxy.Abstractions.ClusterDiscovery.Contract;
-using Microsoft.ReverseProxy.Service;
+using Yarp.ReverseProxy.Abstractions;
+using Yarp.ReverseProxy.Abstractions.ClusterDiscovery.Contract;
+using Yarp.ReverseProxy.Abstractions.Config;
+using Yarp.ReverseProxy.Service;
 
 namespace ReverseProxy
 {
@@ -19,14 +20,14 @@ namespace ReverseProxy
             {
                 RouteId = "route1",
                 ClusterId = "cluster1",
-                Match =
+                Match = new RouteMatch
                 {
                     Path = "/api/service1/{**catch-all}"
                 }
             };
 
-            route.AddTransformPathRemovePrefix(prefix: "/api/service1/");
-            route.AddTransformResponseHeader(headerName: "Source", value: "YARP", append: true, always: false);
+            route.WithTransformPathRemovePrefix(prefix: "/api/service1/");
+            route.WithTransformResponseHeader(headerName: "Source", value: "YARP", append: true, always: false);
 
             var routes = new[] { route };
 
@@ -36,7 +37,7 @@ namespace ReverseProxy
                 {
                     Id = "cluster1",
                     LoadBalancingPolicy = LoadBalancingPolicies.RoundRobin,
-                    Destinations =
+                    Destinations = new Dictionary<string, Destination>
                     {
                         { "destination1", new Destination { Address = "https://localhost:5001/" } },
                         { "destination2", new Destination { Address = "https://localhost:5002/" } }

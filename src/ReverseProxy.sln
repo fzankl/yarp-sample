@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseProxy", "ReverseProxy\ReverseProxy.csproj", "{9E817D00-AFEA-4E9E-A7B8-D7783FF7D589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReverseProxy", "ReverseProxy\ReverseProxy.csproj", "{9E817D00-AFEA-4E9E-A7B8-D7783FF7D589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleService1", "SampleService1\SampleService1.csproj", "{44DA6A3F-E3B8-4074-BEEC-0E155A62BAA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleService1", "SampleService1\SampleService1.csproj", "{44DA6A3F-E3B8-4074-BEEC-0E155A62BAA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleService2", "SampleService2\SampleService2.csproj", "{E2536116-84BA-4B66-A73B-E5935F51DABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleService2", "SampleService2\SampleService2.csproj", "{E2536116-84BA-4B66-A73B-E5935F51DABE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
