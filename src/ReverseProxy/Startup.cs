@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Yarp.ReverseProxy.Service;
+using Yarp.ReverseProxy.Configuration;
 
 namespace ReverseProxy
 {
@@ -26,7 +26,6 @@ namespace ReverseProxy
             }
             else
             {
-
                 services
                     .AddReverseProxy()
                     .LoadFromConfig(_configuration.GetSection("ReverseProxy"));

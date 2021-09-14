@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using Microsoft.Extensions.Primitives;
-using Yarp.ReverseProxy.Abstractions;
-using Yarp.ReverseProxy.Abstractions.ClusterDiscovery.Contract;
-using Yarp.ReverseProxy.Abstractions.Config;
-using Yarp.ReverseProxy.Service;
+using Yarp.ReverseProxy.Configuration;
+using Yarp.ReverseProxy.LoadBalancing;
+using Yarp.ReverseProxy.Transforms;
 
 namespace ReverseProxy
 {
@@ -16,7 +15,7 @@ namespace ReverseProxy
         {
             // Load a basic configuration
             // Should be based on your application needs.
-            var route = new ProxyRoute
+            var routeConfig = new RouteConfig
             {
                 RouteId = "route1",
                 ClusterId = "cluster1",
@@ -26,26 +25,27 @@ namespace ReverseProxy
                 }
             };
 
-            route.WithTransformPathRemovePrefix(prefix: "/api/service1/");
-            route.WithTransformResponseHeader(headerName: "Source", value: "YARP", append: true, always: false);
+            routeConfig = routeConfig
+                .WithTransformPathRemovePrefix(prefix: "/api/service1/")
+                .WithTransformResponseHeader(headerName: "Source", value: "YARP", append: true, always: false);
 
-            var routes = new[] { route };
+            var routeConfigs = new[] { routeConfig };
 
-            var clusters = new[]
+            var clusterConfigs = new[]
             {
-                new Cluster
+                new ClusterConfig
                 {
-                    Id = "cluster1",
+                    ClusterId = "cluster1",
                     LoadBalancingPolicy = LoadBalancingPolicies.RoundRobin,
-                    Destinations = new Dictionary<string, Destination>
+                    Destinations = new Dictionary<string, DestinationConfig>
                     {
-                        { "destination1", new Destination { Address = "https://localhost:5001/" } },
-                        { "destination2", new Destination { Address = "https://localhost:5002/" } }
+                        { "destination1", new DestinationConfig { Address = "https://localhost:5001/" } },
+                        { "destination2", new DestinationConfig { Address = "https://localhost:5002/" } }
                     }
                 }
             };
 
-            _config = new CustomMemoryConfig(routes, clusters);
+            _config = new CustomMemoryConfig(routeConfigs, clusterConfigs);
         }
 
         public IProxyConfig GetConfig() => _config;
@@ -54,7 +54,7 @@ namespace ReverseProxy
         /// By calling this method from the source we can dynamically adjust the proxy configuration.
         /// Since our provider is registered in DI mechanism it can be injected via constructors anywhere.
         /// </summary>
-        public void Update(IReadOnlyList<ProxyRoute> routes, IReadOnlyList<Cluster> clusters)
+        public void Update(IReadOnlyList<RouteConfig> routes, IReadOnlyList<ClusterConfig> clusters)
         {
             var oldConfig = _config;
             _config = new CustomMemoryConfig(routes, clusters);
@@ -65,16 +65,16 @@ namespace ReverseProxy
         {
             private readonly CancellationTokenSource _cts = new CancellationTokenSource();
 
-            public CustomMemoryConfig(IReadOnlyList<ProxyRoute> routes, IReadOnlyList<Cluster> clusters)
+            public CustomMemoryConfig(IReadOnlyList<RouteConfig> routes, IReadOnlyList<ClusterConfig> clusters)
             {
                 Routes = routes;
                 Clusters = clusters;
                 ChangeToken = new CancellationChangeToken(_cts.Token);
             }
 
-            public IReadOnlyList<ProxyRoute> Routes { get; }
+            public IReadOnlyList<RouteConfig> Routes { get; }
 
-            public IReadOnlyList<Cluster> Clusters { get; }
+            public IReadOnlyList<ClusterConfig> Clusters { get; }
 
             public IChangeToken ChangeToken { get; }
 
