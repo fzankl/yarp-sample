@@ -27,7 +27,7 @@ namespace ReverseProxy
 
             routeConfig = routeConfig
                 .WithTransformPathRemovePrefix(prefix: "/api/service1/")
-                .WithTransformResponseHeader(headerName: "Source", value: "YARP", append: true, always: false);
+                .WithTransformResponseHeader(headerName: "Source", value: "YARP", append: true);
 
             var routeConfigs = new[] { routeConfig };
 
