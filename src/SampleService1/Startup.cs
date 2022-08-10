@@ -27,6 +27,11 @@ namespace SampleService1
                 {
                     await context.Response.WriteAsync("Hello from Service 1");
                 });
+
+                endpoints.MapGet("/details", async context =>
+                {
+                    await context.Response.WriteAsync("Hello from Service 1 - Details");
+                });
             });
         }
     }
