@@ -21,12 +21,12 @@ namespace ReverseProxy
                 ClusterId = "cluster1",
                 Match = new RouteMatch
                 {
-                    Path = "/api/service1/{**catch-all}"
+                    Path = "/api/service/{**catch-all}"
                 }
             };
 
             routeConfig = routeConfig
-                .WithTransformPathRemovePrefix(prefix: "/api/service1/")
+                .WithTransformPathRemovePrefix(prefix: "/api/service")
                 .WithTransformResponseHeader(headerName: "Source", value: "YARP", append: true);
 
             var routeConfigs = new[] { routeConfig };
