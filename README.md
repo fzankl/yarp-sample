@@ -14,7 +14,7 @@ Further information:
 ## How to run this sample
 
 To run this sample you have to run all projects in the solution.
-Then just open your browser and make a request to https://localhost:500/api/service1/. 
+Then just open your browser and make a request to https://localhost:500/api/service/. 
 
 Via 'UseCodeBasedConfig' application setting you can switch between appsettings.json and code based configuration.
 The result is the same ;-)
