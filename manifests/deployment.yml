@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: yarpsample 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yarpsample
+  template:
+    metadata:
+      labels:
+        app: yarpsample 
+    spec:
+      containers:
+        - name: yarpsample 
+          image: barcamp.azurecr.io/yarpsample
+          ports:
+          - containerPort: 5000
