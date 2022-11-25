@@ -39,8 +39,8 @@ namespace ReverseProxy
                     LoadBalancingPolicy = LoadBalancingPolicies.RoundRobin,
                     Destinations = new Dictionary<string, DestinationConfig>
                     {
-                        { "destination1", new DestinationConfig { Address = "https://localhost:5001/" } },
-                        { "destination2", new DestinationConfig { Address = "https://localhost:5002/" } }
+                        { "destination1", new DestinationConfig { Address = "http://host.docker.internal:5001/" } },
+                        { "destination2", new DestinationConfig { Address = "http://host.docker.internal:5002/" } }
                     }
                 }
             };
